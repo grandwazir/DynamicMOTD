@@ -19,10 +19,9 @@ package name.richardson.james.dynamicmotd.random;
 
 import java.util.Random;
 
+import name.richardson.james.dynamicmotd.MessageList;
+
 import org.bukkit.configuration.file.YamlConfiguration;
-
-import name.richardson.james.dynamicmotd.*;
-
 
 public class RandomMessageList extends MessageList {
   

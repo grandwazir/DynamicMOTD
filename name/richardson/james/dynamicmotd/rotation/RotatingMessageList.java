@@ -19,10 +19,9 @@ package name.richardson.james.dynamicmotd.rotation;
 
 import java.util.Iterator;
 
+import name.richardson.james.dynamicmotd.MessageList;
+
 import org.bukkit.configuration.file.YamlConfiguration;
-
-import name.richardson.james.dynamicmotd.*;
-
 
 public class RotatingMessageList extends MessageList {
 
