@@ -17,21 +17,25 @@
  ******************************************************************************/
 package name.richardson.james.dynamicmotd;
 
+import java.io.IOException;
 import java.util.List;
 
-import org.bukkit.configuration.file.YamlConfiguration;
+import name.richardson.james.dynamicmotd.util.Configuration;
+import name.richardson.james.dynamicmotd.util.Logger;
 
 
-public abstract class MessageList {
+public abstract class MessagesList extends Configuration {
  
-  protected List<?> messages;
+  protected final static Logger logger = new Logger(MessagesList.class);
+  protected final static String fileName = "messages.yml";
   
-  public MessageList(YamlConfiguration configuration) {
+  protected final List<?> messages;
+  
+  public MessagesList() throws IOException {
     super();
     messages = configuration.getStringList("messages");
   }
   
   abstract public String getMOTD();
-  
   
 }

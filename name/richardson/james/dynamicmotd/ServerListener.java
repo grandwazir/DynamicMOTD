@@ -23,23 +23,26 @@ import org.bukkit.event.server.ServerListPingEvent;
 
 public class ServerListener extends org.bukkit.event.server.ServerListener {
   
-  final private MessageList messageList;
+  public static int maximiumMOTDLength = 35;
+  public static int ellipsesStart = maximiumMOTDLength - 3;
   
-  
-  public ServerListener(MessageList messageList) {
+  private final static Logger logger = new Logger(ServerListener.class);
+  final private MessagesList messageList;
+ 
+  public ServerListener(MessagesList messageList) {
     this.messageList = messageList;
   }
   
   public void onServerListPing(ServerListPingEvent event) {
     String message = trimMessage(messageList.getMOTD());
-    Logger.debug("Recieved ping request, setting MOTD: " + message);
+    logger.debug("Recieved ping request, setting MOTD: " + message);
     event.setMotd(message);
   }
   
   private String trimMessage(String message) {
-    if (message.length() > DynamicMOTD.maximiumMOTDLength) {
-      message = message.substring(0, DynamicMOTD.maximiumMOTDLength);
-      message = message.substring(0, DynamicMOTD.ellipsesStart) + "...";
+    if (message.length() > maximiumMOTDLength) {
+      message = message.substring(0, maximiumMOTDLength);
+      message = message.substring(0, ellipsesStart) + "...";
     }
     return message;
   }

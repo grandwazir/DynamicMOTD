@@ -17,18 +17,17 @@
  ******************************************************************************/
 package name.richardson.james.dynamicmotd.rotation;
 
+import java.io.IOException;
 import java.util.Iterator;
 
-import name.richardson.james.dynamicmotd.MessageList;
+import name.richardson.james.dynamicmotd.MessagesList;
 
-import org.bukkit.configuration.file.YamlConfiguration;
-
-public class RotatingMessageList extends MessageList {
+public class RotatingMessageList extends MessagesList {
 
   private Iterator<?> iterator;
   
-  public RotatingMessageList(YamlConfiguration configuration) {
-    super(configuration);
+  public RotatingMessageList() throws IOException {
+    super();
     refreshIterator();
   }
 

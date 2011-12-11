@@ -17,16 +17,12 @@
  ******************************************************************************/
 package name.richardson.james.dynamicmotd;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 import name.richardson.james.dynamicmotd.random.RandomMessageList;
 import name.richardson.james.dynamicmotd.rotation.RotatingMessageList;
 import name.richardson.james.dynamicmotd.util.Logger;
 
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -35,18 +31,22 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class DynamicMOTD extends JavaPlugin {
   
-  public static int maximiumMOTDLength = 35;
-  public static int ellipsesStart = maximiumMOTDLength - 3;
-  
   private static final Logger logger = new Logger(DynamicMOTD.class);
+  private static DynamicMOTD instance;
   
   private PluginManager pluginManager;
   private PluginDescriptionFile description;
-  private YamlConfiguration configuration;
-  private MessageList messageList;
-  
-  private List<String> defaultMessages = Arrays.asList("Hello", "Bonjour");
+  private MessagesList messageList;
   private ServerListener serverListener;
+  
+  public enum Modes {
+    ROTATION,
+    RANDOM
+  }
+  
+  public DynamicMOTD() {
+    instance = this;
+  }
   
   public void onDisable() {
     logger.info(description.getName() + " is now disabled.");
@@ -58,7 +58,7 @@ public class DynamicMOTD extends JavaPlugin {
     description = this.getDescription();
     
     try {
-      configuration = loadConfiguration();
+      loadConfiguration();
       messageList = loadMessageList();
       registerEvents();
     } catch (IOException exception) {
@@ -76,33 +76,24 @@ public class DynamicMOTD extends JavaPlugin {
     logger.info(description.getFullName() + " is now enabled.");
   }
   
-  private YamlConfiguration loadConfiguration() throws IOException {
-    logger.info("Loading configuration: config.yml.");
-    File configurationFile = getFile("config.yml");
-    YamlConfiguration configuration = YamlConfiguration.loadConfiguration(configurationFile);
-    configuration.addDefault("mode", "rotation");
-    configuration.options().copyDefaults(true);
-    configuration.save(configurationFile);
-    return configuration;
+  private void loadConfiguration() throws IOException {
+    DynamicMOTDConfiguration configuration = new DynamicMOTDConfiguration();
+    if (configuration.isDebugging()) {
+      Logger.enableDebugging();
+      configuration.logValues();
+    }
   }
   
-  private MessageList loadMessageList() throws IOException {
-    logger.info("Loading messages: messages.yml.");
-    File messageListFile = getFile("messages.yml");
-    YamlConfiguration configuration = YamlConfiguration.loadConfiguration(messageListFile);
-    configuration.addDefault("messages", defaultMessages);
-    configuration.options().copyDefaults(true);
-    configuration.save(messageListFile);
-    logger.info(String.format("%d message(s) loaded.", configuration.getStringList("messages").size()));
-    if (this.configuration.getString("mode").equalsIgnoreCase("rotation")) {
-      logger.info("Choosing messages through rotation.");
-      return new RotatingMessageList(configuration);
-    } else if (this.configuration.getString("mode").equalsIgnoreCase("random")) {
-      logger.info("Choosing messages randomly.");
-      return new RandomMessageList(configuration);
-    } else {
-      throw new IllegalArgumentException();
-    }
+  private MessagesList loadMessageList() throws IOException {
+    switch (DynamicMOTDConfiguration.getInstance().getMode()) {
+      case ROTATION:
+        logger.info("Choosing messages through rotation.");
+        return new RotatingMessageList();
+      case RANDOM:
+        logger.info("Choosing messages randomly.");
+        return new RandomMessageList();
+    } 
+    throw new IllegalArgumentException();
   }
 
   private void registerEvents() {
@@ -110,8 +101,8 @@ public class DynamicMOTD extends JavaPlugin {
     pluginManager.registerEvent(Event.Type.SERVER_LIST_PING, serverListener, Event.Priority.Low, this);
   }
   
-  private File getFile(String name) {
-    return new File(this.getDataFolder() + File.separator + name);
+  public static DynamicMOTD getInstance() {
+    return instance;
   }
   
 

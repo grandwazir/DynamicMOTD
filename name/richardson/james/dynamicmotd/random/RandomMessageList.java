@@ -17,16 +17,15 @@
  ******************************************************************************/
 package name.richardson.james.dynamicmotd.random;
 
+import java.io.IOException;
 import java.util.Random;
 
-import name.richardson.james.dynamicmotd.MessageList;
+import name.richardson.james.dynamicmotd.MessagesList;
 
-import org.bukkit.configuration.file.YamlConfiguration;
-
-public class RandomMessageList extends MessageList {
+public class RandomMessageList extends MessagesList {
   
-  public RandomMessageList(YamlConfiguration configuration) {
-    super(configuration);
+  public RandomMessageList() throws IOException {
+    super();
   } 
 
   @Override
