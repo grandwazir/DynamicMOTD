@@ -1,6 +1,6 @@
 name: DynamicMOTD
 main: name.richardson.james.dynamicmotd.DynamicMOTD
-version: 1.0.0
+version: 1.0.1
 author: James Richardson (grandwazir)
 description: Dynamic MOTD for the Minecraft server browser
 website: https://github.com/grandwazir/DynamicMOTD

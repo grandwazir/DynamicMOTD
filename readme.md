@@ -3,7 +3,7 @@ DynamicMOTD - change your server's MOTD dynamically.
 
 ## Description
 
-DynamicMOTD is plugin for the Minecraft wrapper [Bukkit](http://bukkit.org/)Bukkit that provides a way for administrators to change the MOTD for their server automatically when a player pings your server.
+DynamicMOTD is plugin for the Minecraft wrapper [Bukkit](http://bukkit.org/) that provides a way for administrators to change the MOTD for their server automatically when a player pings your server.
 
 There are currently two supported modes:
 
@@ -11,6 +11,14 @@ There are currently two supported modes:
 - Random
 
 ## Installation
+
+### Ensure you are using the latest recommended build.
+
+Before you installing DynamicMOTD, you need to make sure you are running at least the latest [recommended build](http://ci.bukkit.org/job/dev-CraftBukkit/Recommended/) for Bukkit. 
+
+*SPECIAL NOTE*
+
+Recommended build 1337 will not work with this plugin. Before you installing DynamicMOTD, you need to make sure you are running Bukkit version 1.8.1-RC5 or above.
 
 ### Getting DynamicMOTD
 
@@ -24,10 +32,14 @@ Older versions are available as well, however they are not supported.
 
 ### Configuration
 
-Before you installing DynamicMOTD, you need to make sure you are running Bukkit version 1.8.1-RC5 or above. Older versions will not work.
+Then you choose your mode in config.yml The configuration file can be found in the datafolder for the plugin which is usually: 
 
-Then you choose your mode in config.yml and add any messages you want to messages.yml. Both can be found in the datafolder for this plugin.
+    plugins/DynamicMOTD/config.yml
+    
+Then simply add your messages to messages.yml. For example:
 
-Further instructions are available on wiki. 
+    messages:
+      - Hello there
+      - Another message
 
-
+Further [instructions](https://github.com/grandwazir/DynamicMOTD/wiki/instructions) are available on wiki.

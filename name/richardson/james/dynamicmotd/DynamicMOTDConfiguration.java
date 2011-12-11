@@ -12,10 +12,8 @@ public class DynamicMOTDConfiguration extends Configuration {
   protected final static Logger logger = new Logger(DynamicMOTDConfiguration.class);
   protected final static String fileName = "config.yml";
 
-  protected final InputStream defaults = DynamicMOTD.getInstance().getResource(fileName);
-  
-  public DynamicMOTDConfiguration() throws IOException {
-    super();
+  public DynamicMOTDConfiguration(InputStream defaults) throws IOException {
+    super(fileName, defaults);
   }
 
   public static DynamicMOTDConfiguration getInstance() {

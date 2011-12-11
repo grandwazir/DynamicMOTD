@@ -29,7 +29,7 @@ public class Logger {
   private static boolean currentlyDebugging = false;
   private static final Level debugLevel = Level.ALL;
   private static final java.util.logging.Logger parentLogger = java.util.logging.Logger.getLogger("Minecraft");
-  private static final String prefix = "[Reservation] ";
+  private static final String prefix = "[DynamicMOTD] ";
   private static final Set<Logger> registeredLoggers = new HashSet<Logger>();
 
   private final java.util.logging.Logger logger;

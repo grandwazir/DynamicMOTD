@@ -32,16 +32,14 @@ public abstract class Configuration {
   protected static Configuration instance;
   protected final static Logger logger = new Logger(Configuration.class);
 
-  protected final InputStream defaults = DynamicMOTD.getInstance().getResource("config.yml");
   protected final File dataFolder = DynamicMOTD.getInstance().getDataFolder();
   protected YamlConfiguration defaultConfiguration;
   protected YamlConfiguration configuration;
-  protected final String fileName = "config.yml";
 
-  public Configuration() throws IOException {
+  public Configuration(String fileName, InputStream defaults) throws IOException {
     if (this.configuration != null) throw new IllegalStateException("");
     // load configuration
-    logger.info("Loading configuration: " + fileName + ".");
+    logger.debug("Loading configuration: " + fileName + ".");
     final File configurationFile = new File(dataFolder + "/" + fileName);
     logger.debug("Using path: " + configurationFile.toString());
     configuration = YamlConfiguration.loadConfiguration(configurationFile);
@@ -52,6 +50,8 @@ public abstract class Configuration {
       configuration.options().copyDefaults(true);
       configuration.save(configurationFile);
       defaults.close();
+    } else {
+      logger.debug("No default configuration specified.");
     }
     // allow methods to access this configuration.
     instance = this;
