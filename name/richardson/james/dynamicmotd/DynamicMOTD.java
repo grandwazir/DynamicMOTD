@@ -38,6 +38,8 @@ public class DynamicMOTD extends JavaPlugin {
   public static int maximiumMOTDLength = 35;
   public static int ellipsesStart = maximiumMOTDLength - 3;
   
+  private static final Logger logger = new Logger(DynamicMOTD.class);
+  
   private PluginManager pluginManager;
   private PluginDescriptionFile description;
   private YamlConfiguration configuration;
@@ -47,7 +49,7 @@ public class DynamicMOTD extends JavaPlugin {
   private ServerListener serverListener;
   
   public void onDisable() {
-    Logger.info(description.getName() + " is now disabled.");
+    logger.info(description.getName() + " is now disabled.");
   }
 
   @Override
@@ -58,11 +60,12 @@ public class DynamicMOTD extends JavaPlugin {
     try {
       configuration = loadConfiguration();
       messageList = loadMessageList();
+      registerEvents();
     } catch (IOException exception) {
-      Logger.severe("Unable to load a configuration file!");
+      logger.severe("Unable to load a configuration file!");
       this.pluginManager.disablePlugin(this);
     } catch (IllegalArgumentException exception) {
-      Logger.severe("Invalid message mode specified!");
+      logger.severe("Invalid message mode specified!");
       this.pluginManager.disablePlugin(this);
     } finally {
       if (!this.pluginManager.isPluginEnabled(this)) {
@@ -70,12 +73,11 @@ public class DynamicMOTD extends JavaPlugin {
       }
     }
     
-    registerEvents();
-    Logger.info(description.getFullName() + " is now enabled.");
+    logger.info(description.getFullName() + " is now enabled.");
   }
   
   private YamlConfiguration loadConfiguration() throws IOException {
-    Logger.info("Loading configuration: config.yml.");
+    logger.info("Loading configuration: config.yml.");
     File configurationFile = getFile("config.yml");
     YamlConfiguration configuration = YamlConfiguration.loadConfiguration(configurationFile);
     configuration.addDefault("mode", "rotation");
@@ -85,18 +87,18 @@ public class DynamicMOTD extends JavaPlugin {
   }
   
   private MessageList loadMessageList() throws IOException {
-    Logger.info("Loading messages: messages.yml.");
+    logger.info("Loading messages: messages.yml.");
     File messageListFile = getFile("messages.yml");
     YamlConfiguration configuration = YamlConfiguration.loadConfiguration(messageListFile);
     configuration.addDefault("messages", defaultMessages);
     configuration.options().copyDefaults(true);
     configuration.save(messageListFile);
-    Logger.info(String.format("%d message(s) loaded.", configuration.getStringList("messages").size()));
+    logger.info(String.format("%d message(s) loaded.", configuration.getStringList("messages").size()));
     if (this.configuration.getString("mode").equalsIgnoreCase("rotation")) {
-      Logger.info("Choosing messages through rotation.");
+      logger.info("Choosing messages through rotation.");
       return new RotatingMessageList(configuration);
     } else if (this.configuration.getString("mode").equalsIgnoreCase("random")) {
-      Logger.info("Choosing messages randomly.");
+      logger.info("Choosing messages randomly.");
       return new RandomMessageList(configuration);
     } else {
       throw new IllegalArgumentException();
