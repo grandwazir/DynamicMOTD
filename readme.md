@@ -16,9 +16,9 @@ There are currently two supported modes:
 
 Before you installing DynamicMOTD, you need to make sure you are running at least the latest [recommended build](http://ci.bukkit.org/job/dev-CraftBukkit/Recommended/) for Bukkit. 
 
-*SPECIAL NOTE*
+_SPECIAL NOTE_
 
-Recommended build 1337 will not work with this plugin. Before you installing DynamicMOTD, you need to make sure you are running Bukkit version 1.8.1-RC5 or above.
+Recommended build 1337 will not work with this plugin. Before you install DynamicMOTD, you need to make sure you are running Bukkit version 1.8.1-RC5 or above.
 
 ### Getting DynamicMOTD
 
