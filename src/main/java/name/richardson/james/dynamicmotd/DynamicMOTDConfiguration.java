@@ -2,6 +2,8 @@ package name.richardson.james.dynamicmotd;
 
 import java.io.IOException;
 
+import org.bukkit.configuration.ConfigurationSection;
+
 import name.richardson.james.bukkit.utilities.configuration.AbstractConfiguration;
 import name.richardson.james.bukkit.utilities.internals.Logger;
 
@@ -22,7 +24,7 @@ public class DynamicMOTDConfiguration extends AbstractConfiguration {
   public boolean isDebugging() {
     return this.configuration.getBoolean("debugging");
   }
-
+  
   public void logValues() {
     logger.config(String.format("debugging: %b", this.isDebugging()));
     logger.config(String.format("mode: %s", this.getMode().toString()));
