@@ -21,10 +21,7 @@
 package name.richardson.james.dynamicmotd;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
-
-import org.bukkit.configuration.ConfigurationSection;
 
 import name.richardson.james.bukkit.utilities.configuration.AbstractConfiguration;
 
@@ -42,13 +39,8 @@ public abstract class MessagesListConfiguration extends AbstractConfiguration {
     logger.debug(String.format("Apply default configuration."));
     final org.bukkit.configuration.file.YamlConfiguration defaults = getDefaults();
     configuration.setDefaults(defaults);
-    configuration.options().copyDefaults(true);
-    // set example messages if necessary
-    if (!configuration.isList("messages")) {
-      logger.debug("Creating example messages.");
-      List<String> messages = Arrays.asList("Testing...", "1", "2", "3");
-      configuration.set("messages", messages);
-    }
+    // load defaults if necessary
+    if (!configuration.contains("messages")) configuration.options().copyDefaults(true);
     save();
   }
 
