@@ -18,13 +18,13 @@
  * along with DynamicMOTD. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package name.richardson.james.dynamicmotd.random;
+package name.richardson.james.bukkit.dynamicmotd.random;
 
 import java.io.IOException;
 import java.util.Random;
 
-import name.richardson.james.dynamicmotd.DynamicMOTD;
-import name.richardson.james.dynamicmotd.MessagesListConfiguration;
+import name.richardson.james.bukkit.dynamicmotd.DynamicMOTD;
+import name.richardson.james.bukkit.dynamicmotd.MessagesListConfiguration;
 
 public class RandomMessageList extends MessagesListConfiguration {
 

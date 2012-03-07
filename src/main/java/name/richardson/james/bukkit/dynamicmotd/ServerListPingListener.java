@@ -18,7 +18,7 @@
  * along with DynamicMOTD. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package name.richardson.james.dynamicmotd;
+package name.richardson.james.bukkit.dynamicmotd;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

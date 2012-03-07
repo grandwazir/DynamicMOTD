@@ -18,13 +18,13 @@
  * along with DynamicMOTD. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package name.richardson.james.dynamicmotd.rotation;
+package name.richardson.james.bukkit.dynamicmotd.rotation;
 
 import java.io.IOException;
 import java.util.Iterator;
 
-import name.richardson.james.dynamicmotd.DynamicMOTD;
-import name.richardson.james.dynamicmotd.MessagesListConfiguration;
+import name.richardson.james.bukkit.dynamicmotd.DynamicMOTD;
+import name.richardson.james.bukkit.dynamicmotd.MessagesListConfiguration;
 
 public class RotatingMessageList extends MessagesListConfiguration {
 

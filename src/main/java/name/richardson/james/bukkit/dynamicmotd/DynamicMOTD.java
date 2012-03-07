@@ -18,14 +18,14 @@
  * along with DynamicMOTD. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package name.richardson.james.dynamicmotd;
+package name.richardson.james.bukkit.dynamicmotd;
 
 import java.io.IOException;
 
+import name.richardson.james.bukkit.dynamicmotd.random.RandomMessageList;
+import name.richardson.james.bukkit.dynamicmotd.rotation.RotatingMessageList;
 import name.richardson.james.bukkit.utilities.internals.Logger;
 import name.richardson.james.bukkit.utilities.plugin.SimplePlugin;
-import name.richardson.james.dynamicmotd.random.RandomMessageList;
-import name.richardson.james.dynamicmotd.rotation.RotatingMessageList;
 
 public class DynamicMOTD extends SimplePlugin {
 

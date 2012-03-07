@@ -1,4 +1,4 @@
-package name.richardson.james.dynamicmotd;
+package name.richardson.james.bukkit.dynamicmotd;
 
 import java.io.IOException;
 
