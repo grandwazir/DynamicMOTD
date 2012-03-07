@@ -21,31 +21,30 @@
 package name.richardson.james.dynamicmotd;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import name.richardson.james.bukkit.utilities.internals.Logger;
 import name.richardson.james.bukkit.utilities.plugin.SimplePlugin;
 import name.richardson.james.dynamicmotd.random.RandomMessageList;
 import name.richardson.james.dynamicmotd.rotation.RotatingMessageList;
 
-import org.bukkit.Bukkit;
-import org.bukkit.event.Event;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
-
 public class DynamicMOTD extends SimplePlugin {
-
-  private MessagesListConfiguration messageList;
-  private DynamicMOTDConfiguration configuration;
 
   public enum Modes {
     ROTATION,
     RANDOM
   }
 
+  private MessagesListConfiguration messageList;
+
+  private DynamicMOTDConfiguration configuration;
+
+  public MessagesListConfiguration getMessagesList() {
+    return this.messageList;
+  }
+
+  @Override
   public void onDisable() {
-    logger.info(this.getDescription().getName() + " is now disabled.");
+    this.logger.info(this.getDescription().getName() + " is now disabled.");
   }
 
   @Override
@@ -56,44 +55,42 @@ public class DynamicMOTD extends SimplePlugin {
       this.loadConfiguration();
       this.loadMessageList();
       this.registerEvents();
-    } catch (IOException exception) {
-      logger.severe("Unable to load a configuration file!");
+    } catch (final IOException exception) {
+      this.logger.severe("Unable to load a configuration file!");
       this.setEnabled(false);
-    } catch (IllegalArgumentException exception) {
-      logger.severe("Invalid message mode specified!");
+    } catch (final IllegalArgumentException exception) {
+      this.logger.severe("Invalid message mode specified!");
       this.setEnabled(false);
-    } catch (IllegalStateException exception) {
-      logger.severe(exception.getMessage());
+    } catch (final IllegalStateException exception) {
+      this.logger.severe(exception.getMessage());
       this.setEnabled(false);
     } finally {
-      if (!this.isEnabled()) { return; }
+      if (!this.isEnabled()) {
+        return;
+      }
     }
 
-    logger.info(this.getDescription().getFullName() + " is now enabled.");
+    this.logger.info(this.getDescription().getFullName() + " is now enabled.");
   }
 
   private void loadConfiguration() throws IOException {
-    configuration = new DynamicMOTDConfiguration(this);
-    if (configuration.isDebugging()) {
+    this.configuration = new DynamicMOTDConfiguration(this);
+    if (this.configuration.isDebugging()) {
       Logger.setDebugging(this, true);
-      configuration.logValues();
+      this.configuration.logValues();
     }
   }
 
   private MessagesListConfiguration loadMessageList() throws IOException {
-    switch (configuration.getMode()) {
-      case ROTATION:
-        logger.info("Choosing messages through rotation.");
-        return new RotatingMessageList(this);
-      case RANDOM:
-        logger.info("Choosing messages randomly.");
-        return new RandomMessageList(this);
+    switch (this.configuration.getMode()) {
+    case ROTATION:
+      this.logger.info("Choosing messages through rotation.");
+      return new RotatingMessageList(this);
+    case RANDOM:
+      this.logger.info("Choosing messages randomly.");
+      return new RandomMessageList(this);
     }
     throw new IllegalArgumentException();
-  }
-  
-  public MessagesListConfiguration getMessagesList() {
-    return this.messageList;
   }
 
   private void registerEvents() {

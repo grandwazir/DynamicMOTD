@@ -21,7 +21,6 @@
 package name.richardson.james.dynamicmotd.rotation;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Iterator;
 
 import name.richardson.james.dynamicmotd.DynamicMOTD;
@@ -31,19 +30,21 @@ public class RotatingMessageList extends MessagesListConfiguration {
 
   private Iterator<?> iterator;
 
-  public RotatingMessageList(DynamicMOTD plugin) throws IOException {
+  public RotatingMessageList(final DynamicMOTD plugin) throws IOException {
     super(plugin);
-    refreshIterator();
+    this.refreshIterator();
   }
 
   @Override
   public String getMOTD() {
-    if (!iterator.hasNext()) refreshIterator();
-    return iterator.next().toString();
+    if (!this.iterator.hasNext()) {
+      this.refreshIterator();
+    }
+    return this.iterator.next().toString();
   }
 
   private void refreshIterator() {
-    iterator = messages.iterator();
+    this.iterator = this.messages.iterator();
   }
 
 }

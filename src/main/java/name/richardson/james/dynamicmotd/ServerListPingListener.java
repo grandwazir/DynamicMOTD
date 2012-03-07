@@ -33,16 +33,16 @@ public class ServerListPingListener implements Listener {
   public static int ellipsesStart = maximiumMOTDLength - 3;
 
   private final static Logger logger = new Logger(ServerListPingListener.class);
-  
+
   final private MessagesListConfiguration messageList;
 
-  public ServerListPingListener(DynamicMOTD plugin) {
+  public ServerListPingListener(final DynamicMOTD plugin) {
     this.messageList = plugin.getMessagesList();
   }
 
   @EventHandler(priority = EventPriority.NORMAL)
-  public void onServerListPing(ServerListPingEvent event) {
-    String message = trimMessage(messageList.getMOTD());
+  public void onServerListPing(final ServerListPingEvent event) {
+    final String message = this.trimMessage(this.messageList.getMOTD());
     logger.debug("Recieved ping request, setting MOTD: " + message);
     event.setMotd(message);
   }

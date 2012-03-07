@@ -21,7 +21,6 @@
 package name.richardson.james.dynamicmotd.random;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Random;
 
 import name.richardson.james.dynamicmotd.DynamicMOTD;
@@ -29,14 +28,14 @@ import name.richardson.james.dynamicmotd.MessagesListConfiguration;
 
 public class RandomMessageList extends MessagesListConfiguration {
 
-  public RandomMessageList(DynamicMOTD plugin) throws IOException {
+  public RandomMessageList(final DynamicMOTD plugin) throws IOException {
     super(plugin);
   }
 
   @Override
   public String getMOTD() {
-    Integer random = new Random().nextInt(messages.size());
-    return messages.get(random).toString();
+    final Integer random = new Random().nextInt(this.messages.size());
+    return this.messages.get(random).toString();
   }
 
 }
