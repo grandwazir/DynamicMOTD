@@ -24,9 +24,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 
-import name.richardson.james.dynamicmotd.MessagesList;
+import name.richardson.james.dynamicmotd.MessagesListConfiguration;
 
-public class RotatingMessageList extends MessagesList {
+public class RotatingMessageList extends MessagesListConfiguration {
 
   private Iterator<?> iterator;
 

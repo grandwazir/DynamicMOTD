@@ -27,13 +27,13 @@ import java.util.List;
 import name.richardson.james.dynamicmotd.util.Configuration;
 import name.richardson.james.dynamicmotd.util.Logger;
 
-public abstract class MessagesList extends Configuration {
+public abstract class MessagesListConfiguration extends Configuration {
 
-  protected final static Logger logger = new Logger(MessagesList.class);
+  protected final static Logger logger = new Logger(MessagesListConfiguration.class);
   protected final static String fileName = "messages.yml";
   protected final List<?> messages;
 
-  public MessagesList(InputStream defaults) throws IOException {
+  public MessagesListConfiguration(InputStream defaults) throws IOException {
     super(fileName, defaults);
     messages = configuration.getStringList("messages");
     logger.info(String.format("%d message(s) loaded.", messages.size()));

@@ -24,9 +24,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
 
-import name.richardson.james.dynamicmotd.MessagesList;
+import name.richardson.james.dynamicmotd.MessagesListConfiguration;
 
-public class RandomMessageList extends MessagesList {
+public class RandomMessageList extends MessagesListConfiguration {
 
   public RandomMessageList(InputStream defaults) throws IOException {
     super(defaults);

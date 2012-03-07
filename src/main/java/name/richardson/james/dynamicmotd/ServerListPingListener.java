@@ -34,9 +34,9 @@ public class ServerListPingListener implements Listener {
 
   private final static Logger logger = new Logger(ServerListPingListener.class);
   
-  final private MessagesList messageList;
+  final private MessagesListConfiguration messageList;
 
-  public ServerListPingListener(MessagesList messageList) {
+  public ServerListPingListener(MessagesListConfiguration messageList) {
     this.messageList = messageList;
   }
 
