@@ -37,10 +37,7 @@ public class RotatingMessageList extends MessagesList {
 
   @Override
   public String getMOTD() {
-    // if we have reached the end of the list, start at the top again
-    if (!iterator.hasNext()) {
-      refreshIterator();
-    }
+    if (!iterator.hasNext()) refreshIterator();
     return iterator.next().toString();
   }
 
