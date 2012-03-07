@@ -82,16 +82,19 @@ public class DynamicMOTD extends SimplePlugin {
     }
   }
 
-  private MessagesListConfiguration loadMessageList() throws IOException {
+  private void loadMessageList() throws IOException {
     switch (this.configuration.getMode()) {
     case ROTATION:
       this.logger.info("Choosing messages through rotation.");
       this.messageList = new RotatingMessageList(this);
+      break;
     case RANDOM:
       this.logger.info("Choosing messages randomly.");
       this.messageList = new RandomMessageList(this);
+      break;
+    default:
+      throw new IllegalArgumentException();
     }
-    throw new IllegalArgumentException();
   }
 
   private void registerEvents() {
