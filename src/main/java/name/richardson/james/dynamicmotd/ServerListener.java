@@ -20,22 +20,27 @@
 
 package name.richardson.james.dynamicmotd;
 
-import name.richardson.james.dynamicmotd.util.Logger;
-
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.server.ServerListPingEvent;
 
-public class ServerListener extends org.bukkit.event.server.ServerListener {
+import name.richardson.james.bukkit.utilities.internals.Logger;
+
+public class ServerListener implements Listener {
 
   public static int maximiumMOTDLength = 35;
   public static int ellipsesStart = maximiumMOTDLength - 3;
 
   private final static Logger logger = new Logger(ServerListener.class);
+  
   final private MessagesList messageList;
 
   public ServerListener(MessagesList messageList) {
     this.messageList = messageList;
   }
 
+  @EventHandler(priority = EventPriority.NORMAL)
   public void onServerListPing(ServerListPingEvent event) {
     String message = trimMessage(messageList.getMOTD());
     logger.debug("Recieved ping request, setting MOTD: " + message);
