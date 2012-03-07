@@ -32,9 +32,12 @@ public abstract class MessagesListConfiguration extends AbstractConfiguration {
   public MessagesListConfiguration(final DynamicMOTD plugin) throws IOException {
     super(plugin, "messages.yml");
     this.messages = this.configuration.getStringList("messages");
-    this.logger.info(String.format("%d message(s) loaded.", this.messages.size()));
   }
 
+  public int size () {
+    return messages.size();
+  }
+  
   abstract public String getMOTD();
 
 }
