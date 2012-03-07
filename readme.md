@@ -1,8 +1,6 @@
 DynamicMOTD - change your server's MOTD dynamically.
 ====================================
 
-## Description
-
 DynamicMOTD is plugin for the Minecraft wrapper [Bukkit](http://bukkit.org/) that provides a way for administrators to change the MOTD for their server automatically when a player pings your server.
 
 ## Features
@@ -11,8 +9,6 @@ There are currently two supported modes:
 
 - Rotation
 - Random
-
-## Installation
 
 ## Installation
 
@@ -27,8 +23,6 @@ The best way to install DynamicMOTD is to use the [symbolic link](http://reposit
 Alternatively [older versions](http://repository.james.richardson.name/releases/name/richardson/james/bukkit/dynamic-motd/) are available as well, however they are not supported. If you are forced to use an older version for whatever reason, please let me know why by [opening a issue](https://github.com/grandwazir/DynamicMOTD/issues/new) on GitHub.
 
 ## Configuration
-
-### Configuration
 
 Then you choose your mode in config.yml The configuration file can be found in the datafolder for the plugin which is usually: 
 
