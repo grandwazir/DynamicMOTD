@@ -1,5 +1,7 @@
 Changelog for DynamicMOTD (v1.0.1-SNAPSHOT)
 
+2012-03-07 20:10:56 +0000    package name change (James Richardson)
+2012-03-07 20:10:22 +0000    automate generating plugin.yml (James Richardson)
 2012-03-07 20:07:25 +0000    fix falling through case statement to exception (James Richardson)
 2012-03-07 20:04:03 +0000    fix NPE in event listener (James Richardson)
 2012-03-07 20:01:10 +0000    default messages now stored the example.yml file instead (James Richardson)
