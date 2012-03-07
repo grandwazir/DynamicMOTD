@@ -2,8 +2,6 @@ package name.richardson.james.dynamicmotd;
 
 import java.io.IOException;
 
-import org.bukkit.configuration.ConfigurationSection;
-
 import name.richardson.james.bukkit.utilities.configuration.AbstractConfiguration;
 import name.richardson.james.bukkit.utilities.internals.Logger;
 

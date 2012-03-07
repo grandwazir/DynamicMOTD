@@ -86,10 +86,10 @@ public class DynamicMOTD extends SimplePlugin {
     switch (this.configuration.getMode()) {
     case ROTATION:
       this.logger.info("Choosing messages through rotation.");
-      return new RotatingMessageList(this);
+      this.messageList = new RotatingMessageList(this);
     case RANDOM:
       this.logger.info("Choosing messages randomly.");
-      return new RandomMessageList(this);
+      this.messageList = new RandomMessageList(this);
     }
     throw new IllegalArgumentException();
   }
