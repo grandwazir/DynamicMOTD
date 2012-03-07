@@ -41,7 +41,7 @@ public class DynamicMOTD extends JavaPlugin {
   private PluginManager pluginManager;
   private PluginDescriptionFile description;
   private MessagesList messageList;
-  private ServerListener serverListener;
+  private ServerListPingListener serverListener;
 
   public enum Modes {
     ROTATION,
@@ -104,7 +104,7 @@ public class DynamicMOTD extends JavaPlugin {
   }
 
   private void registerEvents() {
-    serverListener = new ServerListener(messageList);
+    serverListener = new ServerListPingListener(messageList);
     pluginManager.registerEvent(Event.Type.SERVER_LIST_PING, serverListener, Event.Priority.Low, this);
   }
 

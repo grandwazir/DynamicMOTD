@@ -27,16 +27,16 @@ import org.bukkit.event.server.ServerListPingEvent;
 
 import name.richardson.james.bukkit.utilities.internals.Logger;
 
-public class ServerListener implements Listener {
+public class ServerListPingListener implements Listener {
 
   public static int maximiumMOTDLength = 35;
   public static int ellipsesStart = maximiumMOTDLength - 3;
 
-  private final static Logger logger = new Logger(ServerListener.class);
+  private final static Logger logger = new Logger(ServerListPingListener.class);
   
   final private MessagesList messageList;
 
-  public ServerListener(MessagesList messageList) {
+  public ServerListPingListener(MessagesList messageList) {
     this.messageList = messageList;
   }
 
