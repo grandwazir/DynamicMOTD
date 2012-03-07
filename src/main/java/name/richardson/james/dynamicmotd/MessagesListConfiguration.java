@@ -21,20 +21,16 @@
 package name.richardson.james.dynamicmotd;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
-import name.richardson.james.dynamicmotd.util.Configuration;
-import name.richardson.james.dynamicmotd.util.Logger;
+import name.richardson.james.bukkit.utilities.configuration.AbstractConfiguration;
 
-public abstract class MessagesListConfiguration extends Configuration {
+public abstract class MessagesListConfiguration extends AbstractConfiguration {
 
-  protected final static Logger logger = new Logger(MessagesListConfiguration.class);
-  protected final static String fileName = "messages.yml";
   protected final List<?> messages;
 
-  public MessagesListConfiguration(InputStream defaults) throws IOException {
-    super(fileName, defaults);
+  public MessagesListConfiguration(DynamicMOTD plugin) throws IOException {
+    super(plugin, "messages.yml");
     messages = configuration.getStringList("messages");
     logger.info(String.format("%d message(s) loaded.", messages.size()));
   }

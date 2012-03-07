@@ -24,14 +24,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 
+import name.richardson.james.dynamicmotd.DynamicMOTD;
 import name.richardson.james.dynamicmotd.MessagesListConfiguration;
 
 public class RotatingMessageList extends MessagesListConfiguration {
 
   private Iterator<?> iterator;
 
-  public RotatingMessageList(InputStream defaults) throws IOException {
-    super(defaults);
+  public RotatingMessageList(DynamicMOTD plugin) throws IOException {
+    super(plugin);
     refreshIterator();
   }
 

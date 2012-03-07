@@ -24,12 +24,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
 
+import name.richardson.james.dynamicmotd.DynamicMOTD;
 import name.richardson.james.dynamicmotd.MessagesListConfiguration;
 
 public class RandomMessageList extends MessagesListConfiguration {
 
-  public RandomMessageList(InputStream defaults) throws IOException {
-    super(defaults);
+  public RandomMessageList(DynamicMOTD plugin) throws IOException {
+    super(plugin);
   }
 
   @Override
