@@ -51,7 +51,8 @@ public class DynamicMOTD extends SimplePlugin {
   public void onEnable() {
 
     try {
-      this.setResourceBundle();
+      // this.setResourceBundle(); TODO: localise plugin
+      this.logger.setPrefix("[DynamicMOTD] ");
       this.loadConfiguration();
       this.loadMessageList();
       this.registerEvents();
