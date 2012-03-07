@@ -36,8 +36,8 @@ public class ServerListPingListener implements Listener {
   
   final private MessagesListConfiguration messageList;
 
-  public ServerListPingListener(MessagesListConfiguration messageList) {
-    this.messageList = messageList;
+  public ServerListPingListener(DynamicMOTD plugin) {
+    this.messageList = plugin.getMessagesList();
   }
 
   @EventHandler(priority = EventPriority.NORMAL)

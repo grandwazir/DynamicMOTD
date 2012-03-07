@@ -23,9 +23,10 @@ package name.richardson.james.dynamicmotd;
 import java.io.IOException;
 import java.io.InputStream;
 
+import name.richardson.james.bukkit.utilities.internals.Logger;
+import name.richardson.james.bukkit.utilities.plugin.SimplePlugin;
 import name.richardson.james.dynamicmotd.random.RandomMessageList;
 import name.richardson.james.dynamicmotd.rotation.RotatingMessageList;
-import name.richardson.james.dynamicmotd.util.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
@@ -33,83 +34,70 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class DynamicMOTD extends JavaPlugin {
+public class DynamicMOTD extends SimplePlugin {
 
-  private static final Logger logger = new Logger(DynamicMOTD.class);
-  private static DynamicMOTD instance;
-
-  private PluginManager pluginManager;
-  private PluginDescriptionFile description;
-  private MessagesList messageList;
-  private ServerListPingListener serverListener;
+  private MessagesListConfiguration messageList;
+  private DynamicMOTDConfiguration configuration;
 
   public enum Modes {
     ROTATION,
     RANDOM
   }
 
-  public DynamicMOTD() {
-    instance = this;
-  }
-
   public void onDisable() {
-    logger.info(description.getName() + " is now disabled.");
+    logger.info(this.getDescription().getName() + " is now disabled.");
   }
 
   @Override
   public void onEnable() {
-    pluginManager = this.getServer().getPluginManager();
-    description = this.getDescription();
 
     try {
-      loadConfiguration();
-      messageList = loadMessageList();
-      registerEvents();
+      this.setResourceBundle();
+      this.loadConfiguration();
+      this.loadMessageList();
+      this.registerEvents();
     } catch (IOException exception) {
       logger.severe("Unable to load a configuration file!");
-      this.pluginManager.disablePlugin(this);
+      this.setEnabled(false);
     } catch (IllegalArgumentException exception) {
       logger.severe("Invalid message mode specified!");
-      this.pluginManager.disablePlugin(this);
+      this.setEnabled(false);
     } catch (IllegalStateException exception) {
       logger.severe(exception.getMessage());
-      this.pluginManager.disablePlugin(this);
+      this.setEnabled(false);
     } finally {
-      if (!this.pluginManager.isPluginEnabled(this)) { return; }
+      if (!this.isEnabled()) { return; }
     }
 
-    logger.info(description.getFullName() + " is now enabled.");
+    logger.info(this.getDescription().getFullName() + " is now enabled.");
   }
 
   private void loadConfiguration() throws IOException {
-    final InputStream defaults = getResource("config.yml");
-    DynamicMOTDConfiguration configuration = new DynamicMOTDConfiguration(defaults);
+    configuration = new DynamicMOTDConfiguration(this);
     if (configuration.isDebugging()) {
-      Logger.enableDebugging();
+      Logger.setDebugging(this, true);
       configuration.logValues();
     }
   }
 
-  private MessagesList loadMessageList() throws IOException {
-    final InputStream defaults = getResource("messages.yml");
-    switch (DynamicMOTDConfiguration.getInstance().getMode()) {
+  private MessagesListConfiguration loadMessageList() throws IOException {
+    switch (configuration.getMode()) {
       case ROTATION:
         logger.info("Choosing messages through rotation.");
-        return new RotatingMessageList(defaults);
+        return new RotatingMessageList(this);
       case RANDOM:
         logger.info("Choosing messages randomly.");
-        return new RandomMessageList(defaults);
+        return new RandomMessageList(this);
     }
     throw new IllegalArgumentException();
   }
-
-  private void registerEvents() {
-    serverListener = new ServerListPingListener(messageList);
-    pluginManager.registerEvent(Event.Type.SERVER_LIST_PING, serverListener, Event.Priority.Low, this);
+  
+  public MessagesListConfiguration getMessagesList() {
+    return this.messageList;
   }
 
-  public static DynamicMOTD getInstance() {
-    return instance;
+  private void registerEvents() {
+    this.getServer().getPluginManager().registerEvents(new ServerListPingListener(this), this);
   }
 
 }
