@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>name.richardson.james.bukkit</groupId>
   <artifactId>dynamic-motd</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.3</version>
   <name>DynamicMOTD</name>
   <description>Change your server's MOTD dynamically.</description>
   <url>http://grandwazir.github.com/${project.name}/</url>
