@@ -2,16 +2,12 @@ package name.richardson.james.bukkit.dynamicmotd;
 
 import java.io.IOException;
 
-import name.richardson.james.bukkit.utilities.configuration.AbstractConfiguration;
-import name.richardson.james.bukkit.utilities.internals.Logger;
+import name.richardson.james.bukkit.utilities.configuration.PluginConfiguration;
 
-public class DynamicMOTDConfiguration extends AbstractConfiguration {
-
-  protected final static Logger logger = new Logger(DynamicMOTDConfiguration.class);
-  protected final static String fileName = "config.yml";
+public class DynamicMOTDConfiguration extends PluginConfiguration {
 
   public DynamicMOTDConfiguration(final DynamicMOTD plugin) throws IOException {
-    super(plugin, "config.yml");
+    super(plugin);
   }
 
   public DynamicMOTD.Modes getMode() {
@@ -21,11 +17,6 @@ public class DynamicMOTDConfiguration extends AbstractConfiguration {
 
   public boolean isDebugging() {
     return this.configuration.getBoolean("debugging");
-  }
-  
-  public void logValues() {
-    logger.config(String.format("debugging: %b", this.isDebugging()));
-    logger.config(String.format("mode: %s", this.getMode().toString()));
   }
 
 }

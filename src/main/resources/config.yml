@@ -1,2 +1,6 @@
 debugging: false
+automatic-updates:
+  enabled: true
+  method: automatic
+  branch: stable
 mode: rotation

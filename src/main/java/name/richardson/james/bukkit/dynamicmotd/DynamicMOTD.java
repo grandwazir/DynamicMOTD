@@ -24,10 +24,9 @@ import java.io.IOException;
 
 import name.richardson.james.bukkit.dynamicmotd.random.RandomMessageList;
 import name.richardson.james.bukkit.dynamicmotd.rotation.RotatingMessageList;
-import name.richardson.james.bukkit.utilities.internals.Logger;
-import name.richardson.james.bukkit.utilities.plugin.SimplePlugin;
+import name.richardson.james.bukkit.utilities.plugin.SkeletonPlugin;
 
-public class DynamicMOTD extends SimplePlugin {
+public class DynamicMOTD extends SkeletonPlugin {
 
   public enum Modes {
     ROTATION,
@@ -38,48 +37,16 @@ public class DynamicMOTD extends SimplePlugin {
 
   private DynamicMOTDConfiguration configuration;
 
+  public String getArtifactID() {
+    return "dynamic-motd";
+  }
+
+  public String getGroupID() {
+    return "name.richardson.james.bukkit";
+  }
+
   public MessagesListConfiguration getMessagesList() {
     return this.messageList;
-  }
-
-  @Override
-  public void onDisable() {
-    this.logger.info(this.getDescription().getName() + " is now disabled.");
-  }
-
-  @Override
-  public void onEnable() {
-
-    try {
-      // this.setResourceBundle(); TODO: localise plugin
-      this.logger.setPrefix("[DynamicMOTD] ");
-      this.loadConfiguration();
-      this.loadMessageList();
-      this.registerEvents();
-    } catch (final IOException exception) {
-      this.logger.severe("Unable to load a configuration file!");
-      this.setEnabled(false);
-    } catch (final IllegalArgumentException exception) {
-      this.logger.severe("Invalid message mode specified!");
-      this.setEnabled(false);
-    } catch (final IllegalStateException exception) {
-      this.logger.severe(exception.getMessage());
-      this.setEnabled(false);
-    } finally {
-      if (!this.isEnabled()) {
-        return;
-      }
-    }
-
-    this.logger.info(this.getDescription().getFullName() + " is now enabled.");
-  }
-
-  private void loadConfiguration() throws IOException {
-    this.configuration = new DynamicMOTDConfiguration(this);
-    if (this.configuration.isDebugging()) {
-      Logger.setDebugging(this, true);
-      this.configuration.logValues();
-    }
   }
 
   private void loadMessageList() throws IOException {
@@ -97,7 +64,12 @@ public class DynamicMOTD extends SimplePlugin {
     }
   }
 
-  private void registerEvents() {
+  protected void loadConfiguration() throws IOException {
+    this.configuration = new DynamicMOTDConfiguration(this);
+    this.loadMessageList();
+  }
+
+  protected void registerEvents() {
     this.getServer().getPluginManager().registerEvents(new ServerListPingListener(this), this);
   }
 
