@@ -1,5 +1,16 @@
-Changelog for DynamicMOTD (v1.0.1-SNAPSHOT)
+Changelog for DynamicMOTD (v1.1.1-SNAPSHOT)
 
+
+v1.1.0
+2012-06-15 22:27:06 +0100    added updater (James Richardson)
+
+v1.0.3
+2012-03-25 00:19:45 +0000    build against latest BukkitUtilities (James Richardson)
+2012-03-07 20:20:35 +0000    typos (James Richardson)
+2012-03-07 20:19:31 +0000    updated README (James Richardson)
+
+v1.0.2
+2012-03-07 20:15:17 +0000    prepare to release (James Richardson)
 2012-03-07 20:10:56 +0000    package name change (James Richardson)
 2012-03-07 20:10:22 +0000    automate generating plugin.yml (James Richardson)
 2012-03-07 20:07:25 +0000    fix falling through case statement to exception (James Richardson)
