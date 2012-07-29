@@ -41,10 +41,6 @@ public class DynamicMOTD extends SkeletonPlugin {
     return "dynamic-motd";
   }
 
-  public String getGroupID() {
-    return "name.richardson.james.bukkit";
-  }
-
   public MessagesListConfiguration getMessagesList() {
     return this.messageList;
   }
@@ -73,4 +69,7 @@ public class DynamicMOTD extends SkeletonPlugin {
     this.getServer().getPluginManager().registerEvents(new ServerListPingListener(this), this);
   }
 
+  protected void setupMetrics() throws IOException {
+    if (this.configuration.isCollectingStats()) new MetricsListener(this);
+  }
 }
