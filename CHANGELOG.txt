@@ -1,5 +1,9 @@
-Changelog for DynamicMOTD (v1.1.1-SNAPSHOT)
+Changelog for DynamicMOTD (v1.1.2-SNAPSHOT)
 
+2012-07-29 18:01:48 +0100    implemented metrics (James Richardson)
+
+v1.1.1
+2012-06-17 15:37:46 +0100    fix #1 and create blank localisation file to avoid start up exception (James Richardson)
 
 v1.1.0
 2012-06-15 22:27:06 +0100    added updater (James Richardson)

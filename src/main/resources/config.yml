@@ -2,6 +2,6 @@ debugging: false
 send-anonymous-statistics: true
 automatic-updates:
   enabled: true
-  method: automatic
+  method: notify
   branch: stable
 mode: rotation
