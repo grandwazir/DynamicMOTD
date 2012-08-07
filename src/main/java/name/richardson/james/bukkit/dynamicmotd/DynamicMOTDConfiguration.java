@@ -11,12 +11,8 @@ public class DynamicMOTDConfiguration extends PluginConfiguration {
   }
 
   public DynamicMOTD.Modes getMode() {
-    final String mode = this.configuration.getString("mode").toUpperCase();
+    final String mode = this.getConfiguration().getString("mode").toUpperCase();
     return Enum.valueOf(DynamicMOTD.Modes.class, mode);
   }
-
-  public boolean isDebugging() {
-    return this.configuration.getBoolean("debugging");
-  }
-
+  
 }

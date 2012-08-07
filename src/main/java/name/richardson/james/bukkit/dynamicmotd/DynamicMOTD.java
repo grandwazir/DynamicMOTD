@@ -24,9 +24,9 @@ import java.io.IOException;
 
 import name.richardson.james.bukkit.dynamicmotd.random.RandomMessageList;
 import name.richardson.james.bukkit.dynamicmotd.rotation.RotatingMessageList;
-import name.richardson.james.bukkit.utilities.plugin.SkeletonPlugin;
+import name.richardson.james.bukkit.utilities.plugin.AbstractPlugin;
 
-public class DynamicMOTD extends SkeletonPlugin {
+public class DynamicMOTD extends AbstractPlugin {
 
   public enum Modes {
     ROTATION,
@@ -48,11 +48,11 @@ public class DynamicMOTD extends SkeletonPlugin {
   private void loadMessageList() throws IOException {
     switch (this.configuration.getMode()) {
     case ROTATION:
-      this.logger.info("Choosing messages through rotation.");
+      this.getCustomLogger().debug(this, "rotation-mode");
       this.messageList = new RotatingMessageList(this);
       break;
     case RANDOM:
-      this.logger.info("Choosing messages randomly.");
+      this.getCustomLogger().debug(this, "random-mode");
       this.messageList = new RandomMessageList(this);
       break;
     default:
@@ -69,7 +69,4 @@ public class DynamicMOTD extends SkeletonPlugin {
     this.getServer().getPluginManager().registerEvents(new ServerListPingListener(this), this);
   }
 
-  protected void setupMetrics() throws IOException {
-    if (this.configuration.isCollectingStats()) new MetricsListener(this);
-  }
 }

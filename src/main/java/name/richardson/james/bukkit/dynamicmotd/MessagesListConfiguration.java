@@ -23,28 +23,28 @@ package name.richardson.james.bukkit.dynamicmotd;
 import java.io.IOException;
 import java.util.List;
 
-import name.richardson.james.bukkit.utilities.persistence.YAMLStorage;
+import name.richardson.james.bukkit.utilities.persistence.AbstractYAMLStorage;
 
-public abstract class MessagesListConfiguration extends YAMLStorage {
+public abstract class MessagesListConfiguration extends AbstractYAMLStorage {
 
   protected final List<?> messages;
 
   public MessagesListConfiguration(final DynamicMOTD plugin) throws IOException {
     super(plugin, "messages.yml");
-    this.messages = this.configuration.getStringList("messages");
+    this.setDefaultsMessages();
+    this.messages = this.getConfiguration().getStringList("messages");
   }
-  
+
+  private void setDefaultsMessages() {
+    if (!getConfiguration().contains("messages")) {
+      final String[] defaults = new String[] {"Testing", "one", "two", "three"};
+      this.getConfiguration().set("messages", defaults);
+    }
+    this.save();
+  }
+
   abstract public String getMOTD();
 
-  @Override
-  public void setDefaults() throws IOException {
-    logger.debug(String.format("Apply default configuration."));
-    final org.bukkit.configuration.file.YamlConfiguration defaults = getDefaults();
-    configuration.setDefaults(defaults);
-    // load defaults if necessary
-    if (!configuration.contains("messages")) configuration.options().copyDefaults(true);
-    save();
-  }
   
   public int size () {
     return messages.size();
