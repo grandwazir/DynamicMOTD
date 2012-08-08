@@ -61,12 +61,13 @@ public class DynamicMOTD extends AbstractPlugin {
   }
 
   protected void loadConfiguration() throws IOException {
+    super.loadConfiguration();
     this.configuration = new DynamicMOTDConfiguration(this);
     this.loadMessageList();
   }
 
-  protected void registerEvents() {
-    this.getServer().getPluginManager().registerEvents(new ServerListPingListener(this), this);
+  protected void registerListeners() {
+    new ServerListPingListener(this);
   }
 
 }

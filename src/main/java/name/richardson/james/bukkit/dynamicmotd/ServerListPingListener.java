@@ -20,6 +20,7 @@
 
 package name.richardson.james.bukkit.dynamicmotd;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -34,6 +35,7 @@ public class ServerListPingListener implements Listener {
 
   public ServerListPingListener(final DynamicMOTD plugin) {
     this.messageList = plugin.getMessagesList();
+    Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
   }
 
   @EventHandler(priority = EventPriority.NORMAL)
